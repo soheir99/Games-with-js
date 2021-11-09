@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="media/fave.jpg">
+    <title>Memory game</title>
+    <style>
+        body {
+            /* background-color: rgb(171, 228, 228); */
+            /* background-color: rgb(196, 172, 190); */
+            background-color: azure;
+        }
+
+        .container {
+            overflow: hidden;
+            width: 990px;
+            height: 600px;
+            margin: auto;
+            border: rgb(91, 151, 153) 3px solid;
+            background-color: rgb(195, 216, 209);
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        div {
+            float: left;
+            margin-left: 8px;
+            margin-top: 8px;
+            /* background-color: rgb(85, 151, 129); */
+            /* background-color: rgb(151, 89, 138); */
+            background-image: url(media/mark.jpg);
+            background-position: center;
+            background-size: cover;
+            width: 90px;
+            height: 90px;
+            cursor: pointer;
+        }
+
+        img {
+            width: 90px;
+            height: 90px;
+            opacity: 1;
+        }
+
+        .back {
+            position: absolute;
+            top: 10px;
+            left: 1238px;
+            border: 2px solid cadetblue;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+
+        .next {
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            border: 2px solid cadetblue;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+
+        span {
+            position: relative;
+        }
+    </style>
+</head>
+<span>
+    <a class="back" href="grid.html">Home</a>
+    <a class="next" href="game1_2.html">Back</a>
+</span>
+<section class="container">
+    <!-- <img src= -->
+</section>
+
+<body>
+    <script>
+        var coun = 1;
+        var allele = document.getElementsByTagName("div");
+        var ele = document.getElementsByClassName("container")[0];
+        var anim1 = new Array("media/images.jpg", "media/images1.jpg", "media/images2.jpg", "media/images3.jpg", "media/images4.jpg", "media/images5.jpg", "media/images6.jpg", "media/images7.jpg", "media/images8.jpg", "media/images9.jpg", "media/images10.jpg", "media/images11.jpg", "media/images12.jpg", "media/images13.jpg", "media/images14.jpg", "media/images15.jpg", "media/images16.jpg", "media/images17.jpg", "media/images18.jpg", "media/images19.jpg", "media/images20.jpg", "media/images21.jpg", "media/images22.jpg", "media/images23.jpg", "media/images24.jpg", "media/images25.jpg", "media/images26.jpg", "media/images27.jpg", "media/images28.jpg", "media/images29.jpg", "media/images.jpg", "media/images1.jpg", "media/images2.jpg", "media/images3.jpg", "media/images4.jpg", "media/images5.jpg", "media/images6.jpg", "media/images7.jpg", "media/images8.jpg", "media/images9.jpg", "media/images10.jpg", "media/images11.jpg", "media/images12.jpg", "media/images13.jpg", "media/images14.jpg", "media/images15.jpg", "media/images16.jpg", "media/images17.jpg", "media/images18.jpg", "media/images19.jpg", "media/images20.jpg", "media/images21.jpg", "media/images22.jpg", "media/images23.jpg", "media/images24.jpg", "media/images25.jpg", "media/images26.jpg", "media/images27.jpg", "media/images28.jpg", "media/images29.jpg")
+        var arr2 = new Array();
+        console.log(anim1.length)
+        var flag = true;
+        var img = []
+        var correct = 0;
+        const nums = new Set();
+        var rightaudio = new Audio('media/apple sound.mp3');
+        var wrongaudio = new Audio('media/wrong.m4a');
+        var winaudio = new Audio('media/congrats.mp3');
+        window.onload = function () {
+            setTimeout(function () {
+                for (let i = 0; i < anim1.length; i++) {
+                    var m = document.querySelectorAll('img')[i];
+                    m.style.opacity = "0";
+                }
+            }, 7000)
+            while (nums.size !== anim1.length) {
+                nums.add(Math.floor(Math.random() * anim1.length));
+            }
+            var newarr
+            newarr = Array.from(nums);
+            console.log(newarr)
+            var coun = anim1.length
+            for (var i = 0; i < coun; i++) {
+                ele.innerHTML += "<div><img src=" + anim1[newarr[i]] + " ></div>";
+            }
+            clic();
+        }
+
+        function clic() {
+            for (var x = 0; x < allele.length; x++) {
+                allele[x].addEventListener('click', function () {
+                    if (flag) {
+                        this.firstChild.style.opacity = "1";
+                        if (arr2.length == 0) arr2[0] = this;
+                        else {
+                            arr2[1] = this; flag = false
+                            if (flag == false) {
+                                if (arr2[0].firstChild.src != arr2[1].firstChild.src) {
+                                    wrongaudio.play();
+                                }
+                                else {
+                                    rightaudio.play();
+                                    correct++;
+                                }
+                            }
+                            setTimeout(check, 2000);
+                        }
+                    }
+                })
+            }
+        }
+
+        function check() {
+            if (flag == false) {
+                if (arr2[0].firstChild.src != arr2[1].firstChild.src) {
+                    arr2[0].firstChild.style.opacity = "0";
+                    arr2[1].firstChild.style.opacity = "0";
+                }
+                arr2 = [];
+                flag = true
+            }
+            if (correct == 6) {
+                winaudio.play();
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teaching the alphabet</title>
+  <link rel="icon" type="image/jpg" href="media/fave.jpg">
+  <style>
+    .square {
+      width: 100px;
+      height: 60px;
+      background-color: rgb(168, 60, 159);
+      margin-left: 20px;
+      margin-top: 20px;
+      font-size: 30px;
+      color: white;
+      float: left;
+      text-align: center;
+      padding-top: 20px;
+      font-weight: bold;
+    }
+
+    body {
+      background-image: url("media/images2/english-language.jpg");
+    }
+
+    .alph {
+      width: 1580px;
+      height: 230px;
+      margin-top: 30px;
+      margin-left: 100px;
+      background-color: antiquewhite;
+      /* border: 2px solid red; */
+      overflow: hidden;
+    }
+
+    .content {
+      width: 1300px;
+      height: 500px;
+      /* border: 2px solid red; */
+      margin-top: 50px;
+      margin-left: 250px;
+      overflow: hidden;
+    }
+
+    .picture {
+      width: 700px;
+      /* background-color: wheat;s */
+      float: left;
+      height: 100%;
+      /* border: black 3px solid; */
+    }
+
+    .word {
+      text-align: center;
+      float: left;
+      margin-left: 40px;
+      height: 50%;
+      width: 500px;
+      padding-top: 100px;
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .audio {
+      width: 300px;
+      height: 120px;
+      font-size: 30px;
+      font-weight: bold;
+      border-radius: 50%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="alph">
+      <div class="square" id="1">A</div>
+      <div class="square" id="2">B</div>
+      <div class="square" id="3">C</div>
+      <div class="square" id="4">D</div>
+      <div class="square" id="5">E</div>
+      <div class="square" id="6">F</div>
+      <div class="square" id="7">G</div>
+      <div class="square" id="8">H</div>
+      <div class="square" id="9">I</div>
+      <div class="square" id="10">J</div>
+      <div class="square" id="11">K</div>
+      <div class="square" id="12">L</div>
+      <div class="square" id="13">M</div>
+      <div class="square" id="14">N</div>
+      <div class="square" id="15">O</div>
+      <div class="square" id="16">P</div>
+      <div class="square" id="17">Q</div>
+      <div class="square" id="18">R</div>
+      <div class="square" id="19">S</div>
+      <div class="square" id="20">T</div>
+      <div class="square" id="21">U</div>
+      <div class="square" id="22">V</div>
+      <div class="square" id="23">W</div>
+      <div class="square" id="24">X</div>
+      <div class="square" id="25">Y</div>
+      <div class="square" id="26">Z</div>
+    </div>
+    <div class="content">
+      <div class="picture">
+        <img width="700px" height="100%" />
+      </div>
+      <div class="word">
+        <button class="audio" onclick="clic()">play audio</button>
+        <button class="audio" onclick="stop()">stop audio</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    var image = new Array(
+      "media/images4/A.png",
+      "media/images4/B.png",
+      "media/images4/C.png",
+      "media/images4/D.png",
+      "media/images4/E.png",
+      "media/images4/F.png",
+      "media/images4/G.png",
+      "media/images4/H.png",
+      "media/images4/I.png",
+      "media/images4/J.png",
+      "media/images4/K.png",
+      "media/images4/L.png",
+      "media/images4/M.png",
+      "media/images4/N.png",
+      "media/images4/O.png",
+      "media/images4/P.png",
+      "media/images4/Q.png",
+      "media/images4/R.png",
+      "media/images4/S.png",
+      "media/images4/T.png",
+      "media/images4/U.png",
+      "media/images4/V.png",
+      "media/images4/W.png",
+      "media/images4/X.png",
+      "media/images4/Y.png",
+      "media/images4/Z.png"
+    );
+    var arryaudio = new Audio();
+    var arrsound = new Array(
+      "media/audio/A.mp3",
+      "media/audio/B.mp3",
+      "media/audio/C.mp3",
+      "media/audio/D.mp3",
+      "media/audio/E.mp3",
+      "media/audio/F.mp3",
+      "media/audio/G.mp3",
+      "media/audio/H.mp3",
+      "media/audio/I.mp3",
+      "media/audio/J.mp3",
+      "media/audio/K.mp3",
+      "media/audio/L.mp3",
+      "media/audio/M.mp3",
+      "media/audio/N.mp3",
+      "media/audio/O.mp3",
+      "media/audio/P.mp3",
+      "media/audio/Q.mp3",
+      "media/audio/R.mp3",
+      "media/audio/S.mp3",
+      "media/audio/T.mp3",
+      "media/audio/U.mp3",
+      "media/audio/V.mp3",
+      "media/audio/W.mp3",
+      "media/audio/X.mp3",
+      "media/audio/Y.mp3",
+      "media/audio/Z.mp3"
+    );
+    var audio = new Audio("media/alphabet-pronunciation-british.mp3");
+
+    for (let i = 0; i < image.length; i++) {
+      var elem = document.getElementsByClassName("square")[i];
+      elem.addEventListener("click", function () {
+        var img = document.getElementsByTagName("img")[0];
+        img.src = image[i];
+        arryaudio.src = arrsound[i];
+        arryaudio.play();
+        //console.log(arryaudio[i]);
+      });
+    }
+
+    function clic() {
+      audio.play();
+    }
+    function stop() {
+      audio.pause();
+    }
+  </script>
+</body>
+
+</html>

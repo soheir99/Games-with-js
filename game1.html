@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="media/fave.jpg">
+    <title>Memory game</title>
+    <style>
+        body {
+            /* background-color: rgb(171, 228, 228); */
+            /* background-color: rgb(196, 172, 190); */
+            background-color: azure;
+        }
+
+        .container {
+            overflow: hidden;
+            width: 725px;
+            height: 550px;
+            margin: auto;
+            border: rgb(91, 151, 153) 3px solid;
+            background-color: rgb(195, 216, 209);
+            border-radius: 8px;
+            margin-top: 35px;
+        }
+
+        div {
+            float: left;
+            margin-left: 25px;
+            margin-top: 25px;
+            /* background-color: rgb(85, 151, 129); */
+            /* background-color: rgb(151, 89, 138); */
+            background-image: url(media/mark.jpg);
+            background-position: center;
+            background-size: cover;
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            opacity: 1;
+        }
+
+        .back {
+            position: absolute;
+            top: 10px;
+            left: 1238px;
+            border: 2px solid cadetblue;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+
+        .next {
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            border: 2px solid cadetblue;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+
+        span {
+            position: relative;
+        }
+    </style>
+</head>
+<span>
+    <a class="back" href="grid.html">Home</a>
+    <a class="next" href="game1_2.html">Next</a>
+</span>
+<section class="container">
+    <!-- <img src= -->
+</section>
+
+<body>
+    <script>
+        var coun = 1;
+        var allele = document.getElementsByTagName("div");
+        var ele = document.getElementsByClassName("container")[0];
+        var anim1 = new Array("media/cat.png", "media/co.jpg", "media/fah.jpg", "media/rabit.jpg", "media/lion.jpg", "media/kaz.jpg", "media/cat.png", "media/co.jpg", "media/fah.jpg", "media/rabit.jpg", "media/lion.jpg", "media/kaz.jpg")
+        var arr2 = new Array();
+        var flag = true;
+        var img = []
+        var correct = 0;
+        const nums = new Set();
+        var rightaudio = new Audio('media/apple sound.mp3');
+        var wrongaudio = new Audio('media/wrong.m4a');
+        var winaudio = new Audio('media/congrats.mp3');
+        window.onload = function () {
+            setTimeout(function () {
+                for (let i = 0; i < anim1.length; i++) {
+                    var m = document.querySelectorAll('img')[i];
+                    m.style.opacity = "0";
+                }
+            }, 1500)
+            while (nums.size !== anim1.length) {
+                nums.add(Math.floor(Math.random() * anim1.length));
+            }
+            var newarr
+            newarr = Array.from(nums);
+            console.log(newarr)
+            var coun = anim1.length
+            for (var i = 0; i < coun; i++) {
+                ele.innerHTML += "<div><img src=" + anim1[newarr[i]] + " ></div>";
+            }
+            clic();
+        }
+
+        function clic() {
+            for (var x = 0; x < allele.length; x++) {
+                allele[x].addEventListener('click', function () {
+                    if (flag) {
+                        this.firstChild.style.opacity = "1";
+                        if (arr2.length == 0) arr2[0] = this;
+                        else {
+                            arr2[1] = this; flag = false
+                            if (flag == false) {
+                                if (arr2[0].firstChild.src != arr2[1].firstChild.src) {
+                                    wrongaudio.play();
+                                }
+                                else {
+                                    rightaudio.play();
+                                    correct++;
+                                }
+                            }
+                            setTimeout(check, 2000);
+                        }
+                    }
+                })
+            }
+        }
+
+        function check() {
+            if (flag == false) {
+                if (arr2[0].firstChild.src != arr2[1].firstChild.src) {
+                    arr2[0].firstChild.style.opacity = "0";
+                    arr2[1].firstChild.style.opacity = "0";
+                }
+                arr2 = [];
+                flag = true
+            }
+            if (correct == 6) {
+                winaudio.play();
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

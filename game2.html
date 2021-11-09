@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coloring</title>
+</head>
+<style>
+    .coloring div {
+        width: 130px;
+        height: 60px;
+        /* border: rgb(145, 130, 158) 2px solid; */
+        border-radius: 50%;
+        margin-top: 10px;
+    }
+
+    .coloring {
+        margin-left: 150px;
+        background-color: rgb(253, 244, 226);
+        border: 2px solid rgb(158, 87, 0);
+        width: 200px;
+        padding-left: 55px;
+        padding-bottom: 8px;
+        float: left;
+    }
+
+    .container {
+        overflow: hidden;
+    }
+
+    .shape {
+        float: left;
+        margin-left: 150px;
+        margin-top: 25px;
+    }
+
+    .red {
+        cursor: pointer;
+        background-color: red;
+    }
+
+    .green {
+        cursor: pointer;
+        background-color: green;
+    }
+
+    .blue {
+        cursor: pointer;
+        background-color: blue;
+    }
+
+    .yellow {
+        cursor: pointer;
+        background-color: rgb(255, 255, 0);
+    }
+
+    .brown {
+        cursor: pointer;
+        background-color: brown;
+    }
+
+    .black {
+        cursor: pointer;
+        background-color: black;
+    }
+
+    .orange {
+        cursor: pointer;
+        background-color: rgb(255, 166, 0);
+    }
+
+    .pink {
+        cursor: pointer;
+        background-color: pink;
+    }
+
+    body {
+        background-color: rgba(255, 236, 202, 0.952);
+    }
+
+    .reqt {
+        width: 300px;
+        height: 300px;
+        background-color: white;
+        margin-top: 50px;
+        margin-left: 150px;
+        border: 1px solid rgb(100, 100, 100);
+    }
+
+    .word {
+        width: 300px;
+        height: 70px;
+        border: 1px solid rgb(100, 100, 100);
+        margin-top: 40px;
+        margin-left: 150px;
+        text-align: center;
+        padding-top: 50px;
+        font-weight: bold;
+        font-size: 25px;
+        border-radius: 50%;
+        float: left;
+    }
+
+    .box {
+        overflow: hidden;
+    }
+
+    .change {
+        float: left;
+        font-size: 20px;
+        font-weight: bold;
+        color: red;
+        width: 150px;
+        height: 40px;
+        text-align: center;
+        padding-top: 18px;
+        margin-top: 65px;
+        margin-left: 50px;
+        /* border: rgb(109, 109, 109) 2px solid; */
+        background-color: rgb(253, 244, 226);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="coloring">
+            <div class="red"></div>
+            <div class="green"></div>
+            <div class="blue"></div>
+            <div class="yellow"></div>
+            <div class="brown"></div>
+            <div class="black"></div>
+            <div class="orange"></div>
+            <div class="pink"></div>
+        </div>
+        <div class="shape">
+            <div class="header">
+                <h2>Please color the shape by clicking on the meaning of the word</h2>
+            </div>
+            <div class="reqt"></div>
+            <div class="box">
+                <div class="word">green</div>
+                <div class="change" onclick="change()">Change</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var word = new Array("red", "green", "blue", "brown", "yellow", "black", "orange", "pink");
+        var req = document.getElementsByClassName("reqt")[0];
+        var wordDiv = document.getElementsByClassName("word")[0];
+        var ch;
+        var rightaudio = new Audio('media/apple sound.mp3');
+        var wrongaudio = new Audio('media/wrong.m4a');
+        var eleButton = document.getElementsByClassName("word")[0];
+
+
+        function change() {
+            ch = word[Math.floor(Math.random() * word.length)];
+            eleButton.innerHTML = ch;
+        }
+
+
+        var allele = document.querySelectorAll('.coloring div');
+        console.log(allele)
+        for (let i = 0; i < allele.length; i++) {
+            allele[i].addEventListener("click", function () {
+                console.log(allele[i].className)
+                req.style.background = allele[i].className;
+                if (allele[i].className != ch) {
+                    wrongaudio.play();
+                }
+                else {
+                    rightaudio.play();
+                    ch = word[Math.floor(Math.random() * word.length)];
+                    eleButton.innerHTML = ch;
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

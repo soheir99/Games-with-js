@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js game</title>
+    <style>
+body {
+    background-color:silver;
+    
+}
+*{
+    font-size: 40px;
+    text-align: center;
+    margin: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px;
+
+
+    
+}
+div h1{
+    width: 100%;
+    height: 50px;
+    background-color:tomato;
+    font-size: x-large;
+    border-radius: 50%;
+}
+
+
+
+
+
+
+
+    </style>
+    
+    
+</head>
+
+<body>
+    <div>
+        <h1 ><i>Rock & Paper & Scissors</i></h1>
+
+
+    </div>
+    
+    
+
+
+
+
+
+    <script type="text/javascript">
+        var userChoice =window.prompt("Do you choose rock ,paper or scissors?");
+        var computerChoice =Math.random();
+        if (computerChoice<0.34)
+        computerChoice="<span style='color:#8E44AD;font-size:50px;'>rock</span>";
+        else if (computerChoice<=0.67)
+        computerChoice = "<span style='color:#8E44AD;font-size:50px;'>paper </span>";
+        else computerChoice="<span style='color:#8E44AD;font-size:50px;'> scissors</span>";
+        document.write("<span style='color:#800080;font-size:50px;'>computerChoice :</span>"+computerChoice);
+        function compare (choice1,choice2)
+        {
+            if (choice1==choice2)
+            return "<span style='color:black;font-size:30px;'>you are a winner</span>";
+            else if (choice1=="rock")
+            {
+                if (choice2=="paper")
+                return "<span style='color:black;font-size:30px; text-align:center;'>you are wins</span>";
+                else return "<span style='color:black;font-size:30px;'>computer wins</span>";
+            }
+            else if (choice1=="paper")
+            {
+                if (choice2=="rock")
+                return"<span style='color:black;font-size:30px;'>you are wins</span>";
+                else return "<span style='color:black;font-size:30px;'>computer wins</span>";
+            }
+            else if (choice1=="scissors")
+            {
+                if (choice2=="rock")
+                return "<span style='color:#6495ED;font-size :30px; paddding:20px;'> your are wins </span>";
+                else return "<span style='color:black;font-size:30px; padding:20px;'>computer wins</span>";
+            }
+        }
+        document.write("<br/>"+compare(userChoice,computerChoice));
+
+
+
+    </script>
+</body>
+</html>
